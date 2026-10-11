@@ -1,0 +1,69 @@
+<!doctype html>
+<notebook theme="air">
+  <title>Convert an Observable notebook</title>
+  <script id="1" type="text/markdown">
+    # Convert an online Observable notebook
+
+    This page turns a notebook from observablehq.com into the new `.html` notebook format, entirely inside your browser. Nothing is uploaded anywhere.
+
+    1. Open the public notebook on observablehq.com in your browser and let it finish loading.
+    2. Save the page: **File → Save Page As…** (Cmd/Ctrl + S), format **Web Page, HTML Only**. (Alternatively, use *View Source*, select all, and copy.)
+    3. Drop the saved file below, or paste the copied source into the box.
+    4. Download the converted notebook and save it in your `nbks` folder.
+
+    Only the newer Notebooks 2.0 are supported, not classic notebooks.
+  </script>
+  <script id="2" type="module">
+    import {exportFromPageHtml} from "./obs-export.mjs";
+
+    const drop = html`<label style="display:block;padding:1.5rem;border:2px dashed #888;border-radius:8px;text-align:center;cursor:pointer">
+      Drop the saved page here, or click to choose a file
+      <input type="file" accept=".html,.htm,text/html" style="display:none">
+    </label>`;
+    const paste = html`<textarea rows="4" style="width:100%;margin-top:.75rem;font:12px monospace" placeholder="…or paste the page source here"></textarea>`;
+    const result = html`<div style="margin-top:.75rem"></div>`;
+    const input = drop.querySelector("input");
+
+    function convert(text) {
+      result.replaceChildren();
+      try {
+        const {html: out, title, cellCount, filename} = exportFromPageHtml(text);
+        result.append(html`<p>${title || filename}: ${cellCount} cells, ${(out.length / 1024).toFixed(1)} KB.</p>`);
+        if (window.showSaveFilePicker) {
+          // Chrome/Edge: let the user choose where to save.
+          const button = html`<button><b>Save as…</b></button>`;
+          const status = html`<span style="margin-left:.5rem"></span>`;
+          button.onclick = async () => {
+            try {
+              const handle = await showSaveFilePicker({
+                suggestedName: filename,
+                types: [{description: "Observable notebook", accept: {"text/html": [".html"]}}]
+              });
+              const writable = await handle.createWritable();
+              await writable.write(out);
+              await writable.close();
+              status.textContent = `Saved ${handle.name}`;
+            } catch (err) {
+              if (err.name !== "AbortError") status.textContent = `Couldn't save: ${err.message}`;
+            }
+          };
+          result.append(button, status);
+        } else {
+          // Firefox/Safari: ordinary download (location depends on browser settings).
+          const url = URL.createObjectURL(new Blob([out], {type: "text/html"}));
+          result.append(html`<a href="${url}" download="${filename}"><b>Download ${filename}</b></a>`);
+        }
+      } catch (err) {
+        result.append(html`<p style="color:#b00"><b>Couldn't convert:</b> ${err.message}</p>`);
+      }
+    }
+
+    const readFile = (file) => file && file.text().then(convert);
+    input.onchange = () => readFile(input.files[0]);
+    drop.ondragover = (e) => e.preventDefault();
+    drop.ondrop = (e) => { e.preventDefault(); readFile(e.dataTransfer.files[0]); };
+    paste.oninput = () => paste.value.trim() && convert(paste.value);
+
+    display(html`<div>${drop}${paste}${result}</div>`);
+  </script>
+</notebook>
