@@ -4,7 +4,9 @@
   <script id="1" type="text/markdown">
     # *Setting up*<br>Observable Notebook Kit
 
-    *we approach this from the perspective of developing ***locally***; if you are developing ***online***, you should still go ahead and follow these instruction to install the Notebook Kit, but you will be downloading your notebooks rather than creating them – consult with your instructor on this since procedures for achieving this are changing at the time of writing. [ for the moment James King has produced this bookmarklet that will download notebooks in the new format: [Download Notebook](https://tools.jamesking.io/observable-notebook-export/) ]*
+    *We approach this from the perspective of developing ***locally***; if you are developing ***online***, you should still go ahead and follow these instruction to install the Notebook Kit, but you will be saving and converting your notebooks rather than creating them.*
+
+    *In the fullness of time, Observable will allow you to download notebooks in the open format natively from its site. For the time, being the same result can be accomplished in one of two ways, set out below in **6.b**.*
 
     ---
   </script>
@@ -95,13 +97,17 @@
 
     ---
 
-    **6. Create your first notebook**
+    **6. a) Create and/or b) Save & Convert your first notebook**
 
-    Open the **Observable Desktop app**. (Refer to [instructions for setting up the desktop app](1_desktopai.html).) An `Untitled` document will appear. Edit the title and add a few **Markdown (`md`) cells** with some text.
+    **a)** Open the **Observable Desktop app**. (Refer to [instructions for setting up the desktop app](1_desktopai.html).) An `Untitled` document will appear. Edit the title and add a few **Markdown (`md`) cells** with some text.
 
     Then select **`File → Save As...`** and save the file as **`index.html`** inside your **`nbks`** folder.
 
     > **Why `index.html`?** This filename is special: it's the page that loads automatically when someone visits the root of your website (e.g. `yoursite.com/` rather than `yoursite.com/something.html`).
+
+    **b)** Open the [Converter](exportnb.html) page (full instructions on that page) and use it to save and then convert a notebook that you have been editing online. If it is your first file then **`Save As...`** **`index.html`** inside your **`nbks`** folder.
+
+    **NOTE:** This converter page is based, in part, on the work of James King who produced a method of doing the same thing using a bookmarklet: [James King’s Download Notebook Bookmarklet](https://tools.jamesking.io/observable-notebook-export/).
 
     ---
 
@@ -114,13 +120,6 @@
     This starts a local web server so you can see your notebooks as a website in your browser. Once it's running, type `h` and press `Return` to see a list of keyboard shortcuts and options — take a moment to read through them. ... And then type `o` and `Return` to **see what happens!**
 
     ---
-  </script>
-  <script id="60" type="text/markdown">
-    ---
-
-    ## Optional: download an online notebook without the bookmarklet
-
-    Save the online notebook's page from your browser, then convert it with the [converter page](exportnb.html), which runs entirely in your browser. Full instructions are on that page.
   </script>
   <script id="51" type="module">
     import {enableCopyButtons} from "./copy-buttons.js";
