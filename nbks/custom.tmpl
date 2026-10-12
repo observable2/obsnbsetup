@@ -41,6 +41,11 @@
         padding-top: 3rem; /* room for the fixed toggle button */
         padding-right: 1rem;
         box-sizing: border-box;
+        position: sticky; /* stays put while main content scrolls */
+        top: 2vw; /* match html padding so it doesn't shift when scrolling starts */
+        align-self: flex-start;
+        max-height: calc(100vh - 4vw);
+        overflow-y: auto;
         transition: margin-left 0.25s ease;
       }
       nav.collapsed {

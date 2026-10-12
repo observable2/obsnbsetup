@@ -6,7 +6,7 @@
 
     *We approach this from the perspective of developing ***locally***; if you are developing ***online***, you should still go ahead and follow these instruction to install the Notebook Kit, but you will be saving and converting your notebooks rather than creating them.*
 
-    *In the fullness of time, Observable will allow you to download notebooks in the open format natively from its site. For the time, being the same result can be accomplished in one of two ways, set out below in **6.b**.*
+    *In the fullness of time, Observable will allow you to download notebooks (including all their attachments and dependencies) in the new open format natively from its site. For the time being, a workable result can be accomplished by following instructions in **6.b** or by using the [Converter](exportnb) page.*
 
     ---
   </script>
@@ -97,7 +97,7 @@
 
     ---
 
-    **6. a) Create and/or b) Save & Convert your first notebook**
+    **6. a) Create and/or b) Export your first notebook**
 
     **a)** Open the **Observable Desktop app**. (Refer to [instructions for setting up the desktop app](1_desktopai.html).) An `Untitled` document will appear. Edit the title and add a few **Markdown (`md`) cells** with some text.
 
@@ -105,9 +105,11 @@
 
     > **Why `index.html`?** This filename is special: it's the page that loads automatically when someone visits the root of your website (e.g. `yoursite.com/` rather than `yoursite.com/something.html`).
 
-    **b)** Open the [Converter](exportnb.html) page (full instructions on that page) and use it to save and then convert a notebook that you have been editing online. If it is your first file then **`Save As...`** **`index.html`** inside your **`nbks`** folder.
+    **b)** If you’ve been making notebooks online and want to start working with them locally in order, say, to make a website from them:
 
-    **NOTE:** This converter page is based, in part, on the work of James King who produced a method of doing the same thing using a bookmarklet: [James King’s Download Notebook Bookmarklet](https://tools.jamesking.io/observable-notebook-export/).
+    Navigate to the notebook online and open the **Sharing** panel (mesh globe icon). Scroll down and click the **Export HTML** button. This will likely put the resultant HTML file in your downloads folder.
+
+    Move the file to your project’s **`nbks`** folder and rename it **`index.html`** (see Why `index.html`? above).
 
     ---
 
